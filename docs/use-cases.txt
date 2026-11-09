@@ -1,0 +1,77 @@
+CROCHET-MINI-LANG-statements use cases
+
+terms:
+stitch - one loop of yarn
+stitch abbreviations - ch chain, sc single, hdc half double, dc double, trc treble, slst slip stitch
+row - a line of stitches, each worked into a stitch of the previous row
+motif - a namend combinantion of stitches that can be reused
+pattern - finished instructions for one piece
+skip - pass over a stitch without working it, which narrows the next row
+
+---declaration (int,color,motif,pattern) 
+
+int width
+int width = 20
+color blue
+color blue = #...
+motif bubbleStitch = {sc,dc,2^sc}
+pattern head
+
+
+
+---assignment (to change the value of a decalred var at runtime)
+
+color wine = #...
+color stripe
+stripe = wine
+
+
+---row (appends a row to a patters and it numbers it automatically
+checks to be done : number of items equals to the stitch count of the prev row)
+
+new row in head: {sc(cream),skip,sc(brown)} x width
+
+
+---conditional (assign color/ row / motif based on row index)
+
+if i == 2 * (i / 2):
+  stripe = wine
+else:
+  stripe = cream
+end
+
+
+---for loop (assign same row for multiple rows in the pattern)
+
+for i from 1 to size:
+  new row in head: {sc(stripe)} x width
+end
+
+
+---conditional loop (add a row until a condition is satisfied)
+
+int n = stitches(head)
+while n < 60:
+  new row in head: {2^sc} x n
+  n = stitches(head)
+end
+
+
+---input (reads an int at runtime, so one program produces patterns of different sizes)
+
+input size
+
+
+---output (prints the numbered rows with their stitch counts and colors. output also prints int expressions, such as stitches(head))
+
+output head
+
+
+---append (extends a motif after declaration, so variants of a stitch can share a base definition)
+
+add 2^sc(wine) to bump
+
+
+---remove (deletes the item at a given position from a motif, to derive a shorter variant without redeclaring it)
+
+remove 1 from bump

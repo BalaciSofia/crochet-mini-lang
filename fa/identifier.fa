@@ -1,0 +1,6 @@
+states: Q0 Q1
+initial: Q0
+final: Q1
+Q0 letter Q1
+Q1 letter Q1
+Q1 digit Q1

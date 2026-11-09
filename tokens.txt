@@ -1,0 +1,57 @@
+// token code   (one per line, the code is what is written in the PIF)
+// 0 and 1 stand for the classes identifier and constant, the rest are fixed tokens
+identifier 0
+constant 1
+// operators
+== 2
+!= 3
+<= 4
+>= 5
+< 6
+> 7
+= 8
++ 9
+- 10
+* 11
+/ 12
+// separators
+, 13
+: 14
+( 15
+) 16
+{ 17
+} 18
+^ 19
+// reserved words
+int 20
+motif 21
+add 22
+remove 23
+color 24
+in 25
+new 26
+row 27
+for 28
+from 29
+to 30
+rows 31
+while 32
+and 33
+or 34
+not 35
+stitches 36
+if 37
+else 38
+end 39
+input 40
+output 41
+pattern 42
+rep 43
+// stitch names (reserved)
+ch 44
+sc 45
+hdc 46
+dc 47
+trc 48
+slst 49
+skip 50

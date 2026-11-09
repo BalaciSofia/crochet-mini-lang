@@ -1,0 +1,10 @@
+states: Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7
+initial: Q0
+final: Q7
+Q0 hash Q1
+Q1 hex Q2
+Q2 hex Q3
+Q3 hex Q4
+Q4 hex Q5
+Q5 hex Q6
+Q6 hex Q7

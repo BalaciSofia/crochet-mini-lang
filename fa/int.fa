@@ -1,0 +1,6 @@
+states: Q0 Q1 Q2
+initial: Q0
+final: Q1 Q2
+Q0 zero Q1
+Q0 nonzero Q2
+Q2 digit Q2

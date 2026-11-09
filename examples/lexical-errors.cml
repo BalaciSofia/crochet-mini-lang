@@ -1,0 +1,13 @@
+//program with lexical errors
+pattern scarf
+color red = #ff00
+color blue = #12345g
+int 3abc = 5
+int n = 007
+int width = 20
+IF width != 20 :
+    output "unterminated
+end
+width = width @ 2
+int under_score = 1
+new row in scarf : sc ^ 5 ! dc

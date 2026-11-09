@@ -1,0 +1,6 @@
+states: Q0 Q1 Q2
+initial: Q0
+final: Q2
+Q0 quote Q1
+Q1 strchar Q1
+Q1 quote Q2

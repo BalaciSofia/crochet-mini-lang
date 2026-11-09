@@ -1,0 +1,39 @@
+//granny square blanket
+pattern blanket
+motif corner = { dc ^ 3, ch ^ 2 }
+color blue = #1e90ff
+color white = #ffffff
+color current = blue
+int rounds
+int r
+int k = 0
+
+output "how many rounds?"
+input rounds
+if rounds < 1 or rounds > 12 :
+    output "rounds must be between 1 and 12"
+    rounds = 1
+end
+
+new row in blanket : ch ^ 4, slst
+for r from 1 to rounds :
+    if r - (r / 2) * 2 == 0 :
+        current = white
+    else :
+        current = blue
+    end
+    new row in blanket : { corner, dc(current) ^ r } rep 4, slst
+end
+
+while rows(blanket) > 8 and not (stitches(blanket) < 50) :
+    remove row from blanket
+    k = k + 1
+end
+if k > 0 :
+    output "removed extra rows:"
+    output k
+end
+output "total rows:"
+output rows(blanket)
+output "total stitches:"
+output stitches(blanket)

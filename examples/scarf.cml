@@ -1,0 +1,19 @@
+//scarf
+pattern scarf
+color red = #ff0000
+motif edge = { sc, dc ^ 2 }
+int n = 3
+int i
+
+new row in scarf : ch ^ 10
+for i from 1 to n :
+    new row in scarf : sc, { dc(red), dc } rep 4, edge
+end
+if rows(scarf) > 3 :
+    remove row from scarf
+else :
+    output "short scarf"
+end
+output "rows:"
+output rows(scarf)
+output stitches(scarf)

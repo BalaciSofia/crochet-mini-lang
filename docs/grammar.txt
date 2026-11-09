@@ -1,0 +1,89 @@
+modified-bnf
+
+CROCHET-MINI-LANG-bnf
+
+
+Lexical part:
+
+----special tokens
+<operator>       ::= <comp_op> | <add_op> | <mul_op> | =
+<comp_op>        ::= == | != | < | > | <= | >=
+<add_op>         ::= + | -
+<mul_op>         ::= * | /
+<separator>      ::= , | : | ( | ) | { | } | ^
+<stitch>         ::= ch | sc | hdc | dc | trc | slst | skip
+<reserved_word>  ::= int | motif | add | remove | color | in | new | row | for | from | to | rows | while | and | or | not | stitches
+                   | if | else | end | input | output | pattern | rep
+                   | ch | sc | hdc | dc | trc | slst | skip
+
+----identifiers
+<identifier>     ::= <letter> | <letter> <ident_rest>
+<ident_rest>     ::= <letter> | <digit> | <letter> <ident_rest> | <digit> <ident_rest>
+<letter>         ::= a | ... | z | A | ... | Z
+
+----constants
+<constant>       ::= <number> | <color>
+<number>         ::= 0 | <nonzero_digit> | <nonzero_digit> <digits>
+<digits>         ::= <digit> | <digit> <digits>
+<color>          ::= # <hex_digit> <hex_digit> <hex_digit> <hex_digit> <hex_digit> <hex_digit>
+<hex_digit>      ::= <digit> | a | ... | f | A | ... | F
+<digit>          ::= 0 | <nonzero_digit>
+<nonzero_digit>  ::= 1 | ... | 9
+
+--strings
+<string>         ::= "" | " <string_chars> "
+<string_chars>   ::= <string_char> | <string_char> <string_chars>
+<string_char>    ::= any character except " and end of line
+
+--comments
+<comment>       ::= // | // <comment_text>
+<comment_text>  ::= <comment_char> | <comment_char> <comment_text>
+<comment_char>  ::= any character except end of line
+
+Syntax part:
+
+<int_decl>       ::= int <identifier> | int <identifier> = <expression>
+<assign>         ::= <identifier> = <expression>
+                   | <identifier> = <color>
+                   | <identifier> = { <item_list> }
+<motif_decl>     ::= motif <identifier> = { <item_list> }
+<color_decl>     ::= color <identifier> | color <identifier> = <color_ref>
+<pattern_decl>   ::= pattern <identifier>
+
+<expression>     ::= <term> | <expression> <add_op> <term>
+<term>           ::= <operand> | <term> <mul_op> <operand>
+<operand>        ::= <number> | <identifier> | ( <expression> ) | stitches ( <identifier> ) | rows ( <identifier> )
+
+<row_stmt>       ::= new row in <identifier> : <item_list>
+<item_list>      ::= <item> | <item> , <item_list>
+<item>           ::= <element> | <stitch_ref> ^ <count>
+<element>        ::= <stitch_ref> | <identifier> | <group>
+<stitch_ref>     ::= <stitch> | <stitch> ( <color_ref> )
+<color_ref>      ::= <color> | <identifier>
+<group>          ::= { <item_list> } rep <count>
+<count>          ::= <operand>
+
+<if_stmt>        ::= if <condition> : <block> end
+                   | if <condition> : <block> else : <block> end
+
+<condition>      ::= <and_cond> | <condition> or <and_cond>
+<and_cond>       ::= <not_cond> | <and_cond> and <not_cond>
+<not_cond>       ::= <comparison> | not <not_cond> | ( <condition> )
+<comparison>     ::= <expression> <comp_op> <expression>
+
+<for_stmt>       ::= for <identifier> from <expression> to <expression> : <block> end
+
+<append_stmt>    ::= add <item> to <identifier>
+                   | add row <identifier> to <identifier>
+<remove_stmt>    ::= remove row from <identifier>
+
+<while_stmt>     ::= while <condition> : <block> end
+
+<input_stmt>     ::= input <identifier>
+<output_stmt>    ::= output <expression> | output <string>
+
+<program>        ::= <block>
+<block>          ::= <statement> | <statement> <block>
+<statement>      ::= <int_decl> | <color_decl> | <motif_decl> | <pattern_decl>
+                   | <assign> | <append_stmt> | <remove_stmt> | <row_stmt>
+                   | <if_stmt> | <for_stmt> | <input_stmt> | <output_stmt> | <while_stmt>
